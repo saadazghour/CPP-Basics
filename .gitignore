@@ -1,5 +1,30 @@
+# IDE
 .idea/
+.vscode/
+*.swp
+*.swo
+
+# Build directories
 cmake-build-*/
-test-framework/
+build/
+out/
+
+# Generated files
 *.o
 *.exe
+*.out
+*.app
+
+# Test framework
+test-framework/
+
+# CMake temporary files
+CMakeCache.txt
+CMakeFiles/
+CMakeScripts/
+cmake_install.cmake
+Makefile
+compile_commands.json
+
+# Course-specific junk
+*.log
