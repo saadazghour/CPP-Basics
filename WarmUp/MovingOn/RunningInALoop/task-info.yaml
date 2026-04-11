@@ -5,7 +5,7 @@ files:
     visible: true
     placeholders:
       - offset: 109
-        length: 7
+        length: 145
         placeholder_text: return;
         initial_state:
           length: 7
@@ -35,7 +35,10 @@ files:
         encrypted_possible_answer: vnVhZMzzomxFUxcGj2EayL3K2sEPhqMRdS7tPvaPpmXzIzg/1YXY+Y8ySkpX8klRlmpQMiq0n4l+MksytKA6J1ysdWnLAkt0B03P1sYLgp91zKCQyluECfSt5t7Z/7mPuyp/fvyBqhFuOvwZAy1P0sInsEjx9KsdoB9cwL88IlyiC7Yd5VhxuClRHYDhPk6XGrM/w1geQM12j2OACE5hZHEwR+I4KlQSD8XMcpflHuswD7vm53dO6fLA96gRdhMcTEY3Re9b0cJriooyTCL7KQ==
         selected: false
         status: Unchecked
-        student_answer: /* TODO */
+        student_answer: |-
+          circle.center.x = generateCoordinate(WEST_BORDER + radius, EAST_BORDER - radius);
+              circle.center.y = generateCoordinate(NORTH_BORDER + radius, SOUTH_BORDER - radius);
+              circle.radius = radius;
         is_visible: false
       - offset: 393
         length: 49
@@ -53,14 +56,14 @@ files:
         encrypted_possible_answer: oQjURSTyBfR1RKP/OweIpANhNR0lkfwJPHb2rhaqVMtSoTlK7MY2Y6DU/XEMg0+QvRxrph19Dri59rRI0x0wPQ==
         selected: false
         status: Unchecked
-        student_answer: return min;
+        student_answer: return min + (rand() / (RAND_MAX / (max - min)));
         is_visible: false
     learner_created: false
   - name: src/collision.cpp
     visible: true
     placeholders:
-      - offset: 82
-        length: 31
+      - offset: 78
+        length: 140
         placeholder_text: return 0.0f;
         dependency:
           section: WarmUp
@@ -75,10 +78,10 @@ files:
         encrypted_possible_answer: PUlIQgIttPqIGuEH/18h55eyy/dVwuBxaW5B6Wt2Cl9k1eKok2ImVAahHkf+TM9LlEBBW4FeG5u/G82ed9uy9HYex3UlBC+z68n3Tg+D8iUdsSLuBKr8wRe6mK/c0fW1
         selected: false
         status: Unchecked
-        student_answer: return 0.0f;
+        student_answer: return sqrt(dx * dx + dy * dy);
         is_visible: false
-      - offset: 170
-        length: 13
+      - offset: 218
+        length: 87
         placeholder_text: return false;
         dependency:
           section: WarmUp
@@ -122,7 +125,7 @@ files:
     visible: true
     placeholders:
       - offset: 69
-        length: 304
+        length: 22
         placeholder_text: "return { 0.0f, 0.0f };"
         dependency:
           section: WarmUp
