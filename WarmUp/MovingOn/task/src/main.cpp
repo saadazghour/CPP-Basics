@@ -20,7 +20,8 @@ void processInput(sf::RenderWindow& window) {
 }
 
 void update(sf::Time delta, sf::CircleShape& player,
-            sf::CircleShape* consumable, Circle* consumableCircle, bool consumed[], int size) {
+            sf::CircleShape* consumable, Circle* consumableCircle,
+            bool consumed[], bool concerned[], int size) {
     Point2D playerPosition = { player.getPosition().x, player.getPosition().y };
     Point2D playerVelocity = calculateVelocity();
     Point2D newPlayerPosition = move(playerPosition, playerVelocity, 0.001f * delta.asMilliseconds());
@@ -32,16 +33,24 @@ void update(sf::Time delta, sf::CircleShape& player,
         Point2D consumablePosition = { consumable[i].getPosition().x, consumable[i].getPosition().y };
         consumableCircle[i] = { consumablePosition, CONSUMABLE_RADIUS };
     }
+    approachingLoop(playerCircle, consumableCircle, concerned, size);
     collisionLoop(playerCircle, consumableCircle, consumed, size);
 }
 
 void render(sf::RenderWindow& window, sf::Sprite& background,
-            const sf::CircleShape& player, const sf::CircleShape* consumable, bool consumed[], int size)
+            const sf::CircleShape& player, sf::CircleShape* consumable,
+            const sf::Texture& consumableTexture, const sf::Texture& concernedTexture,
+            bool consumed[], bool concerned[], int size)
 {
     window.clear(sf::Color::White);
     window.draw(background);
     window.draw(player);
     for (int i = 0; i < size; ++i) {
+        if (!concerned[i]) {
+            consumable[i].setTexture(&consumableTexture);
+        } else {
+            consumable[i].setTexture(&concernedTexture);
+        }
         if (!consumed[i]) {
             window.draw(consumable[i]);
         }
@@ -89,16 +98,24 @@ int main() {
         return status;
     }
 
+    sf::Texture concernedTexture;
+    std::string filename = "resources/starConcerned.png";
+    if (!concernedTexture.loadFromFile(filename)) {
+        return 1;
+    }
+
     bool consumed[COUNT];
+    bool concerned[COUNT];
     for (int i = 0; i < COUNT; ++i) {
         consumed[i] = false;
+        concerned[i] = false;
     }
 
     sf::Clock clock;
     while (window.isOpen()) {
         sf::Time delta = clock.restart();
         processInput(window);
-        update(delta, player, consumable, consumableCircles, consumed, COUNT);
-        render(window, background, player, consumable, consumed, COUNT);
+        update(delta, player, consumable, consumableCircles, consumed, concerned, COUNT);
+        render(window, background, player, consumable, consumableTexture, concernedTexture, consumed, concerned, COUNT);
     }
 }
